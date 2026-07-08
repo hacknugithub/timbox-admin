@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     root to: "dashboard#show", as: :authenticated_root
     resources :employees
     resources :client_users
+
+    resources :posts, path: 'servicios'
   end
 
   devise_scope :user do
