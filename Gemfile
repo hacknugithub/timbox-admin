@@ -49,12 +49,20 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 5.0"
-
 gem "dotenv-rails", "~> 2.8"
+gem "lockbox", "~> 1.4"
+gem "httparty", "~> 0.24.2"
+gem "simple_form", "~> 5.4"
+gem "sassc-rails", "~> 2.1"
+gem "jquery-rails", "~> 4.6"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "factory_bot_rails", "< 6.2.0"
+  gem "rspec-rails", "~> 7.1"
+  gem "faker", "~> 3.4"
 end
 
 group :development do
@@ -66,6 +74,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "rails-erd", "~> 1.7"
 end
 
 group :test do
@@ -74,17 +83,4 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-group :development, :test do
-  gem "factory_bot_rails", "< 6.2.0"
-  gem "rspec-rails", "~> 7.1"
-end
-
-gem "lockbox", "~> 1.4"
-gem "httparty", "~> 0.24.2"
-gem "simple_form", "~> 5.4"
-gem "sassc-rails", "~> 2.1"
-gem "jquery-rails", "~> 4.6"
-
-gem "rails-erd", "~> 1.7", :group => :development
 
