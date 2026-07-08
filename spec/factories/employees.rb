@@ -13,7 +13,7 @@ FactoryBot.define do
     position { Faker::Job.title }
     daily_salary { Faker::Number.decimal(l_digits: 10, r_digits: 2) }
     monthly_salary { Faker::Number.decimal(l_digits: 10, r_digits: 2) }
-    entity { 0 }
-    state { 0 }
+    entity { 'CDMX' }
+    state { 'Ciudad de México' }
   end
 end

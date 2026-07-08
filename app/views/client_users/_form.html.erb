@@ -1,0 +1,65 @@
+<%= form_with(model: client_user, local: true, html: { novalidate: true, data: { controller: "form-validation" } }) do |form| %>
+  <% if client_user.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>No se pudo guardar el usuario:</h5>
+      <ul class="mb-0">
+        <% client_user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :name, "Nombre", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :rfc, "RFC", class: "form-label" %>
+      <%= form.text_field :rfc, class: "form-control text-uppercase", required: true, data: { validate: "required rfc" } %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :address, "Dirección", class: "form-label" %>
+      <%= form.text_field :address, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :phone, "Teléfono", class: "form-label" %>
+      <%= form.telephone_field :phone, class: "form-control", data: { validate: "required phone" } %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :website, "Sitio Web", class: "form-label" %>
+      <%= form.url_field :website, class: "form-control", data: { validate: "required website" } %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :user_id, "Usuario", class: "form-label" %>
+      <%= form.hidden_field :user_id, value: client_user.user_id || current_user.id %>
+      <div class="form-control-plaintext">
+        <%= current_user.email %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="form-check">
+        <%= form.check_box :is_admin, class: "form-check-input" %>
+        <%= form.label :is_admin, "Es administrador", class: "form-check-label" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <%= link_to "Cancelar", client_users_path, class: "btn btn-outline-secondary" %>
+    <%= form.submit "Guardar Usuario", class: "btn btn-primary" %>
+  </div>
+<% end %>

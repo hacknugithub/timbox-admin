@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
   end
 
   def new
-    @employee = Employee.new
+    @employee = current_user.employees.build
   end
 
   def create 
@@ -15,7 +15,7 @@ class EmployeesController < ApplicationController
     if @employee.save
       redirect_to employees_path, notice: "Employee created successfully."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -26,17 +26,17 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    @employee.update_columns(employee_params)
+    @employee.update(employee_params)
     if @employee.save
       redirect_to employees_path, notice: "Employee updated successfully."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @employee.delete
-    redirect_to employees_path, notice: "Employee deleted successfully."
+    @employee.destroy
+    redirect_to employees_path, notice: "Employee deleted successfully.", status: :see_other
   end
 
   private
@@ -46,6 +46,6 @@ class EmployeesController < ApplicationController
   end
 
   def set_employee
-    @employee = Employee.find(employee_id)
+    @employee = current_user.employees.find(params[:id])
   end
 end

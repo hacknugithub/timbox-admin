@@ -33,7 +33,7 @@
           <aside data-sidebar-target="menu" class="bg-light border-end w-25 p-3 overflow-auto" style="min-width: 250px; max-width: 300px;">
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <%= link_to "Colaboradores", "#", class: "nav-link link-dark" %>
+                <%= link_to "Colaboradores", employees_path, class: "nav-link link-dark" %>
               </li>
               <li>
                 <%= link_to "Configuración de Cuenta", "#", class: "nav-link link-dark" %>
@@ -41,13 +41,11 @@
               <li>
                 <%= link_to "Algoritmos", "#", class: "nav-link link-dark" %>
               </li>
-              
-              <% if current_user.try(:admin?) %>
-                <li>
-                  <%= link_to "Usuarios", "#", class: "nav-link text-primary fw-bold" %>
-                </li>
-              <% end %>
-              
+
+              <li>
+                <%= link_to "Usuarios", client_users_path, class: "nav-link text-primary fw-bold" %>
+              </li>
+    
               <li>
                 <%= link_to "Servicios", "#", class: "nav-link link-dark" %>
               </li>

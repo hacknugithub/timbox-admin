@@ -1,0 +1,7 @@
+<% if @client_user %>
+  <p><strong>Nombre:</strong> <%= @client_user.name %></p>
+  <p><strong>RFC:</strong> <%= @client_user.rfc %></p>
+  <p><strong>Dirección:</strong> <%= @client_user.address %></p>
+  <p><strong>Telefono:</strong> <%= @client_user.phone %></p>
+  <p><strong>Sitio Web:</strong> <%= @client_user.website %></p>
+<% end %>

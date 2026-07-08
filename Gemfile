@@ -55,6 +55,7 @@ gem "httparty", "~> 0.24.2"
 gem "simple_form", "~> 5.4"
 gem "sassc-rails", "~> 2.1"
 gem "jquery-rails", "~> 4.6"
+gem 'bootstrap-icons'
 
 
 group :development, :test do

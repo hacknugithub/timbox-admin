@@ -1,35 +1,34 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h2>Últimos Colaboradores</h2>
-  <%= link_to "Ver todos", "#", class: "btn btn-primary btn-sm" %>
-</div>
-
-<div class="table-responsive">
+<div class="d-flex flex-column justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between w-100">
+    <h2>Últimos Clientes</h2>
+  </div>
+<div class="table-responsive w-100">
   <table class="table table-striped table-hover align-middle">
     <thead class="table-dark">
       <tr>
-        <th>Name</th>
-        <th>Email</th>
+        <th>Nombre</th>
         <th>RFC</th>
-        <th>Department</th>
-        <th>Contract Type</th>
-        <th>Started At</th>
+        <th>Dirección</th>
+        <th>Telefono</th>
+        <th>Sitio Web</th>
+        <th>Creado por</th> 
       </tr>
     </thead>
     <tbody>
-      <% if @employees.any? %>
-        <% @employees.each do |employee| %>
+      <% if @client_users.any? %>
+        <% @client_users.each do |client_user| %>
           <tr>
-            <td><%= employee.name %></td>
-            <td><%= employee.email %></td>
-            <td><%= employee.rfc %></td>
-            <td><%= employee.department %></td>
-            <td><%= employee.contract_type %></td>
-            <td><%= employee.started_at&.strftime("%d/%m/%Y") %></td>
+            <td><%= client_user.name %></td>
+            <td><%= client_user.rfc %></td>
+            <td><%= client_user.address %></td>
+            <td><%= client_user.phone %></td>
+            <td><%= client_user.website %></td>
+            <td><%= client_user.user.email %></td>
           </tr>
         <% end %>
       <% else %>
         <tr>
-          <td colspan="6" class="text-center text-muted py-4">No hay colaboradores registrados todavía.</td>
+          <td colspan="6" class="text-center text-muted py-4">No hay clientes registrados todavía.</td>
         </tr>
       <% end %>
     </tbody>

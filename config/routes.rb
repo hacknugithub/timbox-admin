@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   authenticated :user do
     root to: "dashboard#show", as: :authenticated_root
+    resources :employees
+    resources :client_users
   end
 
   devise_scope :user do
