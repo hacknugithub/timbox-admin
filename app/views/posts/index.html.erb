@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Servicios (Publicaciones API)</h2>
+</div>
+
+<div class="card shadow-sm border-0 mb-4 bg-light">
+  <div class="card-body">
+    <h5 class="card-title">Crear Nueva Publicación</h5>
+    <%= render "form", post: @new_post %>
+  </div>
+</div>
+
+<div id="posts">
+  <%= render partial: "post", collection: @posts %>
+</div>

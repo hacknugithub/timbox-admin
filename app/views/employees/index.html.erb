@@ -1,0 +1,49 @@
+<div class="d-flex flex-column justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between w-100">
+    <h2>Últimos Colaboradores</h2>
+    <div class="btn-group p-1" role="group" aria-label="Acciones de Colaboradores">
+      <%= link_to "Crear Colaborador", new_employee_path, class: "btn btn-success m-1 btn-sm", data: { turbo_frame: "_top" } %>
+    </div>
+  </div>
+<div class="table-responsive w-100">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>RFC</th>
+        <th>Department</th>
+        <th>Contract Type</th>
+        <th>Started At</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @employees.any? %>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.name %></td>
+            <td><%= employee.email %></td>
+            <td><%= employee.rfc %></td>
+            <td><%= employee.department %></td>
+            <td><%= employee.contract_type %></td>
+            <td><%= employee.started_working_at&.strftime("%d/%m/%Y") %></td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Acciones de Colaborador">
+                <%= link_to "Editar", edit_employee_path(employee), class: "btn btn-primary m-1 btn-sm", data: { turbo_frame: "_top" } %>
+                <%= button_to "Eliminar", employee_path(employee),
+                      method: :delete,
+                      form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este colaborador?", turbo_frame: "_top" } },
+                      class: "btn btn-danger m-1 btn-sm" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="6" class="text-center text-muted py-4">No hay colaboradores registrados todavía.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

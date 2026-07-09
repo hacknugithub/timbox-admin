@@ -1,0 +1,94 @@
+<%= form_with(model: employee, html: { novalidate: true }, data: { controller: "form-validation", turbo_frame: "_top" }) do |form| %>
+  <% if employee.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>No se pudo guardar el colaborador:</h5>
+      <ul class="mb-0">
+        <% employee.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :name, "Nombre Completo", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+    
+    <div class="col-md-6">
+      <%= form.label :email, "Correo Electrónico", class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", required: true, data: { validate: "required email" } %>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :curp, "CURP", class: "form-label" %>
+      <%= form.text_field :curp, class: "form-control", required: true, data: { validate: "required curp" } %>
+    </div>
+    
+    <div class="col-md-6">
+      <%= form.label :nss, "Número de Seguro Social", class: "form-label" %>
+      <%= form.text_field :nss, class: "form-control", required: true, data: { validate: "required nss" } %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= form.label :rfc, "RFC", class: "form-label" %>
+      <%= form.text_field :rfc, class: "form-control text-uppercase", required: true, data: { validate: "required rfc" } %>
+    </div>
+
+    <div class="col-md-8">
+      <%= form.label :tax_address, "Domicilio Fiscal", class: "form-label" %>
+      <%= form.text_field :tax_address, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= form.label :daily_salary, "Salario Diario", class: "form-label" %>
+      <%= form.number_field :daily_salary, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :monthly_salary, "Salario Mensual", class: "form-label" %>
+      <%= form.number_field :monthly_salary, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :position, "Puesto", class: "form-label" %>
+      <%= form.text_field :position, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= form.label :started_working_at, "Fecha de Ingreso", class: "form-label" %>
+      <%= form.date_field :started_working_at, class: "form-control", required: true, data: { validate: "required" } %>
+    </div>
+    
+    <div class="col-md-4">
+      <%= form.label :state, "Estado", class: "form-label" %>
+      <%= form.select :state, Employee.states.keys.map { |s| [s.humanize, s] }, { prompt: "Seleccione un estado" }, class: "form-select", data: { validate: "required" } %>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <%= form.label :department, "Departamento", class: "form-label" %>
+      <%= form.select :department, Employee.departments.keys.map { |d| [d.humanize, d] }, { prompt: "Seleccione..." }, class: "form-select", data: { validate: "required" } %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :contract_type, "Tipo de Contrato", class: "form-label" %>
+      <%= form.select :contract_type, Employee.contract_types.keys.map { |c| [c.humanize, c] }, { prompt: "Seleccione..." }, class: "form-select", data: { validate: "required" } %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <%= link_to "Cancelar", employees_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
+    <%= form.submit "Guardar Colaborador", class: "btn btn-primary" %>
+  </div>
+<% end %>

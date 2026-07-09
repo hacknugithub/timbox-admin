@@ -1,0 +1,51 @@
+<div class="d-flex flex-column justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between w-100">
+    <h2>Usuarios</h2>
+    <%= link_to "Crear Usuario", new_client_user_path, class: "btn btn-success m-1 btn-sm", data: { turbo: false } %>
+  </div>
+<div class="table-responsive w-100">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>RFC</th>
+        <th>Dirección</th>
+        <th>Telefono</th>
+        <th>Sitio Web</th>
+        <th>Creado por</th> 
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @client_users.any? %>
+        <% @client_users.each do |client_user| %>
+          <tr>
+            <td><%= client_user.name %></td>
+            <td><%= client_user.rfc %></td>
+            <td><%= client_user.address %></td>
+            <td><%= client_user.phone %></td>
+            <td><%= client_user.website %></td>
+            <td><%= client_user.user.email %></td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Acciones de Usuario">
+                <%= link_to "Editar", edit_client_user_path(client_user), class: "btn btn-primary m-1 btn-sm", data: { turbo_frame: "_top" } %>
+                <%= button_to "Eliminar", client_user_path(client_user),
+                      method: :delete,
+                      form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este usuario?", turbo_frame: "_top" } },
+                      class: "btn btn-danger m-1 btn-sm" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="6" class="text-center text-muted py-4">
+            No hay clientes registrados todavía.<br>
+            Crea un nuevo usuario para comenzar a gestionar clientes.
+            <%= link_to "Crear Usuario", new_client_user_path, class: "btn btn-success m-1 btn-sm", data: { turbo_frame: "_top" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

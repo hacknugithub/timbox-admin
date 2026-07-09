@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2 class="mb-4">Configuración de Cuenta</h2>
+
+    <%= form_with(model: @user, url: account_settings_path, method: :patch, local: true, data: { turbo_frame: "_top" }) do |form| %>
+      
+      <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white border-bottom">
+          <h5 class="mb-0">Perfil</h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <%= form.label :email, "Correo Electrónico", class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", required: true %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :rfc, "RFC", class: "form-label" %>
+            <%= form.text_field :rfc, class: "form-control text-uppercase", required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white border-bottom">
+          <h5 class="mb-0">Cambiar Contraseña</h5>
+          <small class="text-muted">Deja estos campos en blanco si no deseas cambiar tu contraseña.</small>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <%= form.label :password, "Nueva Contraseña", class: "form-label" %>
+            <%= form.password_field :password, class: "form-control", autocomplete: "new-password" %>
+            <% if @minimum_password_length %>
+              <div class="form-text"><%= @minimum_password_length %> caracteres mínimo.</div>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :password_confirmation, "Confirmar Nueva Contraseña", class: "form-label" %>
+            <%= form.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="mb-3">
+            <%= form.label :current_password, "Contraseña Actual", class: "form-label text-danger" %>
+            <%= form.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+            <div class="form-text text-danger">Requerido únicamente si vas a actualizar tu contraseña.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 mb-5">
+        <%= link_to "Cancelar", authenticated_root_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
+        <%= form.submit "Guardar Cambios", class: "btn btn-primary" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
