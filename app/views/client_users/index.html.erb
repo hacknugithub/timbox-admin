@@ -42,7 +42,7 @@
           <td colspan="6" class="text-center text-muted py-4">
             No hay clientes registrados todavía.<br>
             Crea un nuevo usuario para comenzar a gestionar clientes.
-            <%= link_to "Crear Usuario", new_client_user_path, class: "btn btn-success m-1 btn-sm" %>
+            <%= link_to "Crear Usuario", new_client_user_path, class: "btn btn-success m-1 btn-sm", data: { turbo_frame: "_top" } %>
           </td>
         </tr>
       <% end %>

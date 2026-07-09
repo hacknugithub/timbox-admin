@@ -7,10 +7,14 @@
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.23",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
