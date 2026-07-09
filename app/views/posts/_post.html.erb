@@ -5,7 +5,7 @@
       <p class="card-text text-muted"><%= post.body %></p>
       
       <div class="d-flex gap-2 mt-3">
-        <%= link_to "Todas las publicaciones", posts_path, class: "btn btn-sm btn-outline-secondary" %>
+        <%= link_to("Editar", edit_post_path(post.id), class: "btn btn-sm btn-outline-primary") %>
         
         <%= link_to "Eliminar", post_path(post.id), 
             data: { 

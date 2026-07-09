@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Algoritmos: Validador de Palíndromos</h2>
+</div>
+
+<div class="card shadow-sm border-0 mb-4 bg-light">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Detectar Palíndromos</h5>
+    
+    <%= form_with(url: algorithms_path, method: :get, local: true, data: { turbo_frame: "_top" }) do |form| %>
+      <div class="mb-3">
+        <%= form.label :words, "Ingresa palabras separadas por coma", class: "form-label fw-bold" %>
+        <%= form.text_field :words, value: @input_words, class: "form-control", placeholder: "ej. radar, hola, ana, mundo", required: true %>
+        <div class="form-text">Debes ingresar al menos dos palabras separadas por coma.</div>
+      </div>
+      
+      <div class="d-flex justify-content-end">
+        <%= form.submit "Verificar Palabras", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if @error %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>¡Atención!</strong> <%= @error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% elsif @input_words.present? %>
+  <div class="card shadow-sm border-0 border-top border-primary border-4">
+    <div class="card-body">
+      <h5 class="text-primary">Resultados del análisis</h5>
+      
+      <% if @palindromes.any? %>
+        <p>Se encontraron <strong><%= @palindromes.size %></strong> palíndromos en tu lista:</p>
+        <ul class="list-group list-group-flush mb-0">
+          <% @palindromes.each do |palindrome| %>
+            <li class="list-group-item"><%= palindrome %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-muted mb-0">No se encontraron palíndromos en las palabras ingresadas.</p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

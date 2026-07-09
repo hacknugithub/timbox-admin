@@ -1,4 +1,4 @@
-<%= form_with(model: client_user, local: true, html: { novalidate: true, data: { controller: "form-validation" } }) do |form| %>
+<%= form_with(model: client_user, local: true, html: { novalidate: true, data: { controller: "form-validation", turbo_frame: "_top" } }) do |form| %>
   <% if client_user.errors.any? %>
     <div class="alert alert-danger">
       <h5>No se pudo guardar el usuario:</h5>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="d-flex justify-content-end gap-2">
-    <%= link_to "Cancelar", client_users_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "Cancelar", client_users_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
     <%= form.submit "Guardar Usuario", class: "btn btn-primary" %>
   </div>
 <% end %>

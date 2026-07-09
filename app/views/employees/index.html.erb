@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between w-100">
     <h2>Últimos Colaboradores</h2>
     <div class="btn-group p-1" role="group" aria-label="Acciones de Colaboradores">
-      <%= link_to "Crear Colaborador", new_employee_path, class: "btn btn-success m-1 btn-sm" %>
+      <%= link_to "Crear Colaborador", new_employee_path, class: "btn btn-success m-1 btn-sm", data: { turbo_frame: "_top" } %>
     </div>
   </div>
 <div class="table-responsive w-100">
@@ -30,7 +30,7 @@
             <td><%= employee.started_working_at&.strftime("%d/%m/%Y") %></td>
             <td>
               <div class="btn-group" role="group" aria-label="Acciones de Colaborador">
-                <%= link_to "Editar", edit_employee_path(employee), class: "btn btn-primary m-1 btn-sm" %>
+                <%= link_to "Editar", edit_employee_path(employee), class: "btn btn-primary m-1 btn-sm", data: { turbo_frame: "_top" } %>
                 <%= button_to "Eliminar", employee_path(employee),
                       method: :delete,
                       form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este colaborador?", turbo_frame: "_top" } },

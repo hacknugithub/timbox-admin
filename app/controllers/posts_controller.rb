@@ -14,6 +14,9 @@ class PostsController < ApplicationController
   end
 
   def edit
+    unless @post.present?
+      redirect_to posts_path, alert: "No se encontró la publicación solicitada." and return
+    end
   end
 
   def create
@@ -31,7 +34,15 @@ class PostsController < ApplicationController
     response = JsonPlaceholder::Client.update_post(@post.id, post_params.to_h)
     @post = Post.new(response)
 
-    render partial: 'post', locals: { post: @post }
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to posts_path, notice: "Post updated successfully." }
+    end
+  rescue StandardError
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@post), partial: 'posts/form', locals: { post: @post }) }
+      format.html { redirect_to posts_path, alert: "No se pudo actualizar la publicación." }
+    end
   end
 
   def destroy
@@ -48,7 +59,7 @@ class PostsController < ApplicationController
   
   def set_post
     raw_post = JsonPlaceholder::Client.find_post(params[:id])
-    @post = Post.new(raw_post) if raw_post
+    @post = Post.new(raw_post) if raw_post.present?
   end
 
   def post_params

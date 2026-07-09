@@ -26,8 +26,7 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    @employee.update(employee_params)
-    if @employee.save
+    if @employee.update(employee_params)
       redirect_to employees_path, notice: "Employee updated successfully."
     else
       render :edit, status: :unprocessable_entity

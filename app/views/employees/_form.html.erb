@@ -1,4 +1,4 @@
-<%= form_with(model: employee, local: true, html: { novalidate: true, data: { controller: "form-validation" } }) do |form| %>
+<%= form_with(model: employee, html: { novalidate: true }, data: { controller: "form-validation", turbo_frame: "_top" }) do |form| %>
   <% if employee.errors.any? %>
     <div class="alert alert-danger">
       <h5>No se pudo guardar el colaborador:</h5>
@@ -88,7 +88,7 @@
   </div>
 
   <div class="d-flex justify-content-end gap-2">
-    <%= link_to "Cancelar", employees_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "Cancelar", employees_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
     <%= form.submit "Guardar Colaborador", class: "btn btn-primary" %>
   </div>
 <% end %>
